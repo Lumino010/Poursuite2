@@ -110,9 +110,11 @@ public class MainActivity extends AppCompatActivity {
 
         if (view.getId() == R.id.bouton_repos){
 
+
+
             distance_menace += 8;
             fatigue += (-10);
-            soif += 20;
+            /*soif += 20;*/
             ecart= distance-distance_menace;
 
             ProgressBar progressBarFatigue = findViewById(R.id.progressBarFatigue);
