@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="_usr_local_Android_Sdk_platforms_android_26_android_jar-android-26">
+    <CLASSES>
+      <root url="jar:///usr/local/Android/Sdk/platforms/android-26/android.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
