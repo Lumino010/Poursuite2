@@ -2,8 +2,8 @@ package com.example.kelyandhedin.myfirstapplication;
 
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -11,6 +11,9 @@ import android.widget.TextView;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
+
+    public static final int MIN_DIST = 3;
+    public static final int MAX_DIST = 8;
 
     private int distance = 0;
     private int distance_menace = -50;
@@ -20,12 +23,17 @@ public class MainActivity extends AppCompatActivity {
     private int soif = 0;
     private int eau = 100;
     private int ecart = 0;
+    private Random r = new Random();
+
+    private ProgressBar progressBarEcart;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        progressBarEcart = findViewById(R.id.progressBarEcart);
     }
 
 
@@ -44,22 +52,15 @@ public class MainActivity extends AppCompatActivity {
 
     public void Action(View view) {
 
-        ProgressBar progressBarEcart = findViewById(R.id.progressBarEcart);
+
 
         Drawable progressDrawable = progressBarEcart.getProgressDrawable().mutate();
-
-        int min_dist = 3;
-        int max_dist = 8;
 
         int min_menace = 5;
         int max_menace = 8;
 
-        Random r = new Random();
-        int i1 = r.nextInt(max_dist - min_dist + 1) + min_dist;
-
-        Random s = new Random();
-        int i2 = s.nextInt(max_menace - min_menace + 1) + min_dist;
-
+        int i1 = getRandomIntBetwween(MIN_DIST, MAX_DIST);
+        int i2 = getRandomIntBetwween(min_menace, max_menace);//r.nextInt(max_menace - min_menace + 1) + min_dist;
 
         if (view.getId() == R.id.bouton_marcher){
 
@@ -186,9 +187,12 @@ public class MainActivity extends AppCompatActivity {
 
         }
 
-
     }
 
+    private int getRandomIntBetwween(int min_dist, int max_dist) {
+
+        return r.nextInt(max_dist - min_dist + 1) + min_dist;
+    }
 
 
 }
