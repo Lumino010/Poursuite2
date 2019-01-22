@@ -18,9 +18,12 @@ public class MainActivity extends AppCompatActivity {
     private String text_distance;
     private String text_ecart;
     private int etat_fatigue = 0;   //fatigue du joueur
-    private int soif = 0;           //sooif du joueur
-    private int eau = 100;          //quantité d'eau du joueur
+    private int fatigue = 10;       //de combien augmente la fatigue
+    private int etat_soif = 0;      //soif du joueur
+    private int soif = 7;           //de combien augmente la soif
+    private int etat_eau = 100;     //quantité d'eau du joueur
     private int pillule = 3;        // nombre de pillule du joueur
+    private int pillule_effet = 0;  //numéro de l'effet de la pillule
     private int ecart = 50;         // écart entre la menace et le
 
 
@@ -93,8 +96,8 @@ public class MainActivity extends AppCompatActivity {
             if (etat_fatigue <= 100) {
 
                 distance += i1;
-                etat_fatigue += 10;
-                soif += 10;
+                etat_fatigue += fatigue;
+                etat_soif += soif;
                 distance_menace += i2;
                 ecart = distance - distance_menace;
 
@@ -105,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
                 progressBarFatigue.setProgress(etat_fatigue);
 
                 ProgressBar progressBarSoif = findViewById(R.id.progressBarSoif);
-                progressBarSoif.setProgress(soif);
+                progressBarSoif.setProgress(etat_soif);
 
 
                 progressBarEcart.setProgress(100 - (2 * ecart));
@@ -128,14 +131,14 @@ public class MainActivity extends AppCompatActivity {
         if (view.getId() == R.id.bouton_repos){ //si bouton appué est le bouton se reposer
 
             distance_menace += 8;
-            etat_fatigue += (-10);
+            etat_fatigue += (-12);
             ecart= distance-distance_menace;
 
             ProgressBar progressBarFatigue = findViewById(R.id.progressBarFatigue);
             progressBarFatigue.setProgress(etat_fatigue);
 
             ProgressBar progressBarSoif = findViewById(R.id.progressBarSoif);
-            progressBarSoif.setProgress(soif);
+            progressBarSoif.setProgress(etat_soif);
 
             progressBarEcart.setProgress(100-(2*ecart));
 
@@ -149,18 +152,18 @@ public class MainActivity extends AppCompatActivity {
 
         if (view.getId() == R.id.bouton_boire){ //si bouton appué est le bouton boire
 
-            if (eau > 0) {
+            if (etat_eau > 0) {
 
                 distance_menace += 3;
-                eau += (-15);
-                soif += (-10);
+                etat_eau += (-15);
+                etat_soif += (-10);
                 ecart = distance - distance_menace;
 
                 ProgressBar progessBarEau = findViewById(R.id.progressBarEau);
-                progessBarEau.setProgress(eau);
+                progessBarEau.setProgress(etat_eau);
 
                 ProgressBar progressBarSoif = findViewById(R.id.progressBarSoif);
-                progressBarSoif.setProgress(soif);
+                progressBarSoif.setProgress(etat_soif);
 
                 progressBarEcart.setProgress(100 - (2 * ecart));
 
@@ -179,6 +182,7 @@ public class MainActivity extends AppCompatActivity {
 
             if (pillule > 0) {
 
+                pillule_effet +=1;
                 distance_menace += 3;
                 ecart = distance - distance_menace;
 
@@ -199,7 +203,7 @@ public class MainActivity extends AppCompatActivity {
 
         }
 
-        if(ecart <= 0){     //savoir si la menace à rattraper le joueur
+        if(ecart <= 0 || etat_soif >= 100){     //savoir si la menace à rattraper le joueur ou si il est mort de soif
             Intent intent= new Intent(this,Main2Activity.class);
             startActivity(intent);
             //GAME OVER
