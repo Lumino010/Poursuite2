@@ -14,7 +14,8 @@ import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
 
-    private int distance = 0; //distance parcouru par le joueur
+    private int distance = 120; //distance à parcourir
+    private int distance_joueur = 0; //distance parcouru par le joueur
     private int distance_menace = -50;  //distance parcouru par la menace
     public static final int MIN_DIST = 3;
     public static final int MAX_DIST = 8;
@@ -22,9 +23,9 @@ public class MainActivity extends AppCompatActivity {
     private String text_distance;
     private String text_ecart;
     private int etat_fatigue = 0;   //fatigue du joueur
-    private int fatigue = 10;       //de combien augmente la fatigue
+    private int fatigue = 8;       //de combien augmente la fatigue
     private int etat_soif = 0;      //soif du joueur
-    private int soif = 7;           //de combien augmente la soif
+    private int soif = 6;           //de combien augmente la soif
     private int etat_eau = 100;     //quantité d'eau du joueur
     private int pillule = 3;        // nombre de pillule du joueur
     private int pillule_effet = 0;  //numéro de l'effet de la pillule
@@ -106,14 +107,14 @@ public class MainActivity extends AppCompatActivity {
 
             if (etat_fatigue <= 100) {
 
-                distance += i1;
+                distance_joueur += i1;
                 etat_fatigue += fatigue;
                 etat_soif += soif;
                 distance_menace += i2;
-                ecart = distance - distance_menace;
+                ecart = distance_joueur - distance_menace;
 
                 ProgressBar progressBarDistance = findViewById(R.id.progressBarDistance);
-                progressBarDistance.setProgress(distance);
+                progressBarDistance.setProgress(distance_joueur);
 
                 ProgressBar progressBarFatigue = findViewById(R.id.progressBarFatigue);
                 progressBarFatigue.setProgress(etat_fatigue);
@@ -127,11 +128,11 @@ public class MainActivity extends AppCompatActivity {
                 DangerColor(view, ecart);
 
                 TextView textViewDistance = findViewById(R.id.TextDistance);    //affichage distance
-                text_distance = distance + "/120 km";
+                text_distance = distance_joueur + "/120 km";
                 textViewDistance.setText(text_distance);
 
                 TextView textView2 = findViewById(R.id.ecart_menace);   //affichage de l''écart
-                text_ecart = (distance - distance_menace) + "km";
+                text_ecart = (distance_joueur - distance_menace) + "km";
                 textView2.setText(text_ecart);
             }else{
                 //bruit, animation ou message
@@ -141,9 +142,9 @@ public class MainActivity extends AppCompatActivity {
 
         if (view.getId() == R.id.bouton_repos){ //si bouton appué est le bouton se reposer
 
-            distance_menace += 8;
+            distance_menace += 6;
             etat_fatigue += (-12);
-            ecart= distance-distance_menace;
+            ecart= distance_joueur-distance_menace;
 
             ProgressBar progressBarFatigue = findViewById(R.id.progressBarFatigue);
             progressBarFatigue.setProgress(etat_fatigue);
@@ -156,7 +157,7 @@ public class MainActivity extends AppCompatActivity {
             DangerColor(view,ecart);
 
             TextView textView = findViewById(R.id.ecart_menace);    //affichage de l''écart
-            text_ecart = (distance-distance_menace)+"km";
+            text_ecart = (distance_joueur-distance_menace)+"km";
             textView.setText(text_ecart);
 
         }
@@ -167,8 +168,8 @@ public class MainActivity extends AppCompatActivity {
 
                 distance_menace += 3;
                 etat_eau += (-15);
-                etat_soif += (-10);
-                ecart = distance - distance_menace;
+                etat_soif += (-9);
+                ecart = distance_joueur - distance_menace;
 
                 ProgressBar progessBarEau = findViewById(R.id.progressBarEau);
                 progessBarEau.setProgress(etat_eau);
@@ -181,7 +182,7 @@ public class MainActivity extends AppCompatActivity {
                 DangerColor(view, ecart);
 
                 TextView textView = findViewById(R.id.ecart_menace);    //affichage de l''écart
-                text_ecart = (distance - distance_menace) + "km";
+                text_ecart = (distance_joueur - distance_menace) + "km";
                 textView.setText(text_ecart);
             }else{
                 //bruit, animation ou message
@@ -197,7 +198,7 @@ public class MainActivity extends AppCompatActivity {
                 pillule_effet +=1;
                 pillule_tour = 5;
                 distance_menace += 3;
-                ecart = distance - distance_menace;
+                ecart = distance_joueur - distance_menace;
 
                 if (pillule_effet == 1 ){
                     soif=0;
@@ -216,7 +217,7 @@ public class MainActivity extends AppCompatActivity {
                 DangerColor(view, ecart);
 
                 TextView textView = findViewById(R.id.ecart_menace);    //affichage de l''écart
-                text_ecart = (distance - distance_menace) + "km";
+                text_ecart = (distance_joueur - distance_menace) + "km";
                 textView.setText(text_ecart);
 
             }else{
@@ -235,12 +236,15 @@ public class MainActivity extends AppCompatActivity {
             soif=12;
         }
 
+        // ajouter les event aléatoire
+
         if(ecart <= 0 || etat_soif >= 100 || etat_fatigue >= 100){     //savoir si la menace à rattraper le joueur ou si il est mort de soif
             Intent intent= new Intent(this,Main2Activity.class);
             startActivity(intent);
             //GAME OVER
-        }else{
-
+        }else if (distance_joueur >= distance){
+            Intent intent= new Intent(this,Main2Activity.class);
+            startActivity(intent);
         }
 
 
