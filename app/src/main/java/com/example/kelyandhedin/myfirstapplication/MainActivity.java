@@ -240,10 +240,14 @@ public class MainActivity extends AppCompatActivity {
 
         if(ecart <= 0 || etat_soif >= 100 || etat_fatigue >= 100){     //savoir si la menace à rattraper le joueur ou si il est mort de soif
             Intent intent= new Intent(this,Main2Activity.class);
+            String strName = null;
+            intent.putExtra("You loose", strName);
             startActivity(intent);
             //GAME OVER
         }else if (distance_joueur >= distance){
             Intent intent= new Intent(this,Main2Activity.class);
+            String strName = null;
+            intent.putExtra("You win", strName);
             startActivity(intent);
         }
 
