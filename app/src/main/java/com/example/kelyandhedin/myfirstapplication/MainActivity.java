@@ -19,8 +19,6 @@ public class MainActivity extends AppCompatActivity {
     public static final int MIN_DIST = 3;
     public static final int MAX_DIST = 8;
 
-    private int distance = 0;
-    private int distance_menace = -50;
     private String text_distance;
     private String text_ecart;
     private int etat_fatigue = 0;   //fatigue du joueur
@@ -30,10 +28,16 @@ public class MainActivity extends AppCompatActivity {
     private int etat_eau = 100;     //quantité d'eau du joueur
     private int pillule = 3;        // nombre de pillule du joueur
     private int pillule_effet = 0;  //numéro de l'effet de la pillule
+    private int pillule_tour = 0;   //nombre de tour de l'effet de la pillule
     private int ecart = 50;         // écart entre la menace et le
     private Random r = new Random();
 
     private ProgressBar progressBarEcart;
+
+    private int getRandomIntBetwween(int min_dist, int max_dist) {
+
+        return r.nextInt(max_dist - min_dist + 1) + min_dist;
+    }
 
 
     @Override
@@ -92,8 +96,8 @@ public class MainActivity extends AppCompatActivity {
         int min_dist = 3;   //un peu de hasard quand la personne marche
         int max_dist = 8;
 
-        int min_menace = 5;
-        int max_menace = 8;
+        int min_menace = 4;
+        int max_menace = 6;
 
         int i1 = getRandomIntBetwween(MIN_DIST, MAX_DIST);
         int i2 = getRandomIntBetwween(min_menace, max_menace);//r.nextInt(max_menace - min_menace + 1) + min_dist;
@@ -189,9 +193,20 @@ public class MainActivity extends AppCompatActivity {
 
             if (pillule > 0) {
 
+                pillule += (-1);
                 pillule_effet +=1;
+                pillule_tour = 5;
                 distance_menace += 3;
                 ecart = distance - distance_menace;
+
+                if (pillule_effet == 1 ){
+                    soif=0;
+                }else if (pillule_effet == 2){
+                    fatigue=0;
+                }else if (pillule_effet == 3){
+                    soif=0;
+                    fatigue=0;
+                }
 
                 ProgressBar progressBarPillule = findViewById(R.id.progressBarPillule);
                 progressBarPillule.setProgress(pillule);
@@ -210,19 +225,27 @@ public class MainActivity extends AppCompatActivity {
 
         }
 
-        if(ecart <= 0 || etat_soif >= 100){     //savoir si la menace à rattraper le joueur ou si il est mort de soif
+        if(pillule_tour > 0 ){
+            pillule_tour += (-1);
+        }else if(pillule_tour == 0 ){
+            fatigue=10;
+            soif=7;
+        }else if (pillule_tour == 0 && pillule_effet > 0){
+            fatigue=15;
+            soif=12;
+        }
+
+        if(ecart <= 0 || etat_soif >= 100 || etat_fatigue >= 100){     //savoir si la menace à rattraper le joueur ou si il est mort de soif
             Intent intent= new Intent(this,Main2Activity.class);
             startActivity(intent);
             //GAME OVER
+        }else{
+
         }
 
 
     }
 
-    private int getRandomIntBetwween(int min_dist, int max_dist) {
-
-        return r.nextInt(max_dist - min_dist + 1) + min_dist;
-    }
 
 
 }
