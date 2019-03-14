@@ -17,7 +17,7 @@
         android:max="120"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/viewSwitcher" />
+        app:layout_constraintTop_toBottomOf="@+id/imageDecor" />
 
     <TextView
         android:id="@+id/TextDistance"
@@ -27,6 +27,7 @@
         android:layout_marginStart="8dp"
         android:text="0/120 km"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/progressBarDistance" />
 
@@ -34,9 +35,11 @@
         android:id="@+id/textView8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:text="Fatigue"
+        app:layout_constraintEnd_toStartOf="@+id/progressBarFatigue"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ecart_menace" />
 
@@ -44,9 +47,11 @@
         android:id="@+id/textView9"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="12dp"
         android:text="Soif"
+        app:layout_constraintEnd_toStartOf="@+id/progressBarSoif"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
@@ -141,23 +146,6 @@
         app:layout_constraintTop_toBottomOf="@+id/progressBarEau"
         app:layout_constraintVertical_bias="0.651" />
 
-    <ViewSwitcher
-        android:id="@+id/viewSwitcher"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="350dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.51"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.07999998">
-
-    </ViewSwitcher>
-
     <ProgressBar
         android:id="@+id/progressBarEcart"
         style="?android:attr/progressBarStyleHorizontal"
@@ -187,7 +175,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:text="Menace"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -214,16 +202,48 @@
         android:layout_height="20dp"
         android:layout_marginBottom="80dp"
         android:layout_marginEnd="32dp"
-        android:layout_marginStart="32dp"
         android:layout_marginTop="16dp"
         android:max="3"
         android:progress="3"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/progressBarEau"
         app:layout_constraintTop_toBottomOf="@+id/progressBarEau" />
 
+    <ImageView
+        android:id="@+id/imageDecor"
+        android:layout_width="0dp"
+        android:layout_height="242dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@mipmap/foret" />
+
+    <ImageView
+        android:id="@+id/imagePersonnage"
+        android:layout_width="38dp"
+        android:layout_height="83dp"
+        android:layout_marginBottom="36dp"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageDecor"
+        app:layout_constraintStart_toStartOf="@+id/imageDecor"
+        app:srcCompat="@mipmap/jeanjacques" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="41dp"
+        android:layout_height="36dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="12dp"
+        app:layout_constraintEnd_toStartOf="@+id/progressBarPillule"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView10"
+        app:srcCompat="@mipmap/pill" />
 
 
 </android.support.constraint.ConstraintLayout>
