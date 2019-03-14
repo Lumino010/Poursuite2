@@ -5,7 +5,6 @@ import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -19,8 +18,6 @@ public class MainActivity extends AppCompatActivity {
     public static final int MIN_DIST = 3;
     public static final int MAX_DIST = 8;
 
-    private int distance = 0;
-    private int distance_menace = -50;
     private String text_distance;
     private String text_ecart;
     private int etat_fatigue = 0;   //fatigue du joueur
