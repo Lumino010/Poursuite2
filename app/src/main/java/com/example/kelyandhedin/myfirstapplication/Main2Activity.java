@@ -9,6 +9,10 @@ import android.widget.TextView;
 public class Main2Activity extends AppCompatActivity {
 
 
+    //String strName= getIntent().getExtras().getString("END");
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,9 +24,11 @@ public class Main2Activity extends AppCompatActivity {
             if (extras == null) {
                 newString = null;
             } else {
-                newString = extras.getString("you loose");
+                newString = extras.getString("END","you loose");
             }
         }
+
+
 
         TextView textViewEND = findViewById(R.id.textViewEND);   //affichage de l''écart
         String text_fin = newString ;

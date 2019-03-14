@@ -7,6 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -88,6 +90,8 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+
+
     public void Action(View view) { //fonction d'action pour marcher,boire,se reposer ou prendre une pillule
 
         ProgressBar progressBarEcart = findViewById(R.id.progressBarEcart);
@@ -115,6 +119,10 @@ public class MainActivity extends AppCompatActivity {
 
                 ProgressBar progressBarDistance = findViewById(R.id.progressBarDistance);
                 progressBarDistance.setProgress(distance_joueur);
+
+                /*LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                lp.setMargins(distance_joueur, top, right, bottom);
+                imageView.setLayoutParams(lp);*/
 
                 ProgressBar progressBarFatigue = findViewById(R.id.progressBarFatigue);
                 progressBarFatigue.setProgress(etat_fatigue);
@@ -239,15 +247,15 @@ public class MainActivity extends AppCompatActivity {
         // ajouter les event aléatoire
 
         if(ecart <= 0 || etat_soif >= 100 || etat_fatigue >= 100){     //savoir si la menace à rattraper le joueur ou si il est mort de soif
+
             Intent intent= new Intent(this,Main2Activity.class);
-            String strName = null;
-            intent.putExtra("You loose", strName); //envois le texte en fonction de la fin du jeu.
+            intent.putExtra("END", "vous avez échouez !" ); //envois le texte en fonction de la fin du jeu.
             startActivity(intent);
             //GAME OVER
         }else if (distance_joueur >= distance){ // victoire
+
             Intent intent= new Intent(this,Main2Activity.class);
-            String strName = null;
-            intent.putExtra("You win", strName);
+            intent.putExtra("END", "Vous vous êtes échapé !");
             startActivity(intent);
         }
 
