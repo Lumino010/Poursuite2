@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bg_splashscreen"
     tools:context="com.example.kelyandhedin.myfirstapplication.Main2Activity">
 
     <TextView
@@ -14,6 +15,9 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="96dp"
         android:text="GAME OVER"
+        android:fontFamily="@font/labor_text"
+        android:textColor="@color/colorPrimary"
+        android:textSize="100px"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
@@ -26,7 +30,11 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="12dp"
+        android:fontFamily="@font/labor_text"
+        android:textAlignment="center"
+        android:textColor="#fff"
         android:text="..."
+        android:textSize="56px"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
