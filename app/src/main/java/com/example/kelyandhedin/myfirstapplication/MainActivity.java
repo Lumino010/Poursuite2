@@ -248,13 +248,13 @@ public class MainActivity extends AppCompatActivity {
         if(ecart <= 0 || etat_soif >= 100 || etat_fatigue >= 100){     //savoir si la menace à rattraper le joueur ou si il est mort de soif
 
             Intent intent= new Intent(this,Main2Activity.class);
-            intent.putExtra("END", "vous avez échouez !" ); //envois le texte en fonction de la fin du jeu.
+            intent.putExtra("END", "vous avez echoue !" ); //envois le texte en fonction de la fin du jeu.
             startActivity(intent);
             //GAME OVER
         }else if (distance_joueur >= distance){ // victoire
 
             Intent intent= new Intent(this,Main2Activity.class);
-            intent.putExtra("END", "Vous vous êtes échapé !");
+            intent.putExtra("END", "Vous vous etes echape !");
             startActivity(intent);
         }
 
